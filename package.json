@@ -1,0 +1,75 @@
+{
+  "name": "ugly_c2_ffi",
+  "version": "1.0.0",
+  "description": "High-performance 2D collision detection using LuaJIT FFI",
+  "main": "lua/collision_ffi.lua",
+  "types": "lua/collision_ffi.lua",
+  "keywords": [
+    "collision",
+    "detection",
+    "lua",
+    "luajit",
+    "ffi",
+    "performance",
+    "game",
+    "physics",
+    "spatial",
+    "hashing"
+  ],
+  "author": "Optimized for LuaJIT FFI",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/example/ugly_c2_ffi.git"
+  },
+  "homepage": "https://github.com/example/ugly_c2_ffi",
+  "bugs": {
+    "url": "https://github.com/example/ugly_c2_ffi/issues"
+  },
+  "engines": {
+    "lua": ">=5.1",
+    "luajit": ">=2.1"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "luajit": ">=2.1"
+  },
+  "scripts": {
+    "build": "mkdir -p build && cd build && cmake .. && make",
+    "build:windows": "mkdir -p build && cd build && cmake -G \"Visual Studio 17 2022\" -A x64 .. && cmake --build . --config Release",
+    "build:debug": "mkdir -p build && cd build && cmake -DCMAKE_BUILD_TYPE=Debug .. && make",
+    "install": "cd build && make install",
+    "test": "luajit test/*.lua",
+    "benchmark": "luajit benchmark/benchmark.lua",
+    "love": "love love2d-example"
+  },
+  "files": [
+    "lua/",
+    "src/",
+    "include/",
+    "examples/",
+    "love2d-example/",
+    "benchmark/",
+    "docs/",
+    "LICENSE",
+    "README.md",
+    "CHANGELOG.md"
+  ],
+  "luarocks": {
+    "build": {
+      "type": "builtin",
+      "modules": {
+        "ugly_c2_ffi": "lua/collision_ffi.lua",
+        "ugly_c2_ffi.collision": "lua/collision/init.lua",
+        "ugly_c2_ffi.collision.layer": "lua/collision/layer.lua",
+        "ugly_c2_ffi.collision.ffi_defs": "lua/collision/ffi_defs.lua"
+      },
+      "build": {
+        "type": "cmake",
+        "config": [
+          "-DBUILD_SHARED_LIBS=ON"
+        ]
+      }
+    }
+  }
+}
